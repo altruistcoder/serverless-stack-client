@@ -1,4 +1,4 @@
-  export default {
+export default {
     s3: {
       REGION: "us-east-1",
       BUCKET: "notes-app-uploads-sopra"

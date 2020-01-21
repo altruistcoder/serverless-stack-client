@@ -1,12 +1,12 @@
-import { LinkContainer } from "react-router-bootstrap";
-
-import "./App.css";
-
-import Routes from "./Routes";
-import { Nav, Navbar, NavItem } from "react-bootstrap";
-import { Auth } from "aws-amplify";
 import React, { useState, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
+import { Nav, Navbar, NavItem } from "react-bootstrap";
+import Routes from "./Routes";
+import "./App.css";
+import { Auth } from "aws-amplify";
+
+
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -34,22 +34,23 @@ function App(props) {
     await Auth.signOut();
   
     userHasAuthenticated(false);
+
     props.history.push("/login");
   }
-
   return (
     !isAuthenticating &&
     <div className="App container">
       <Navbar fluid collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Scratch</Link>
+            <Link to="/">Developer Portal</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav pullRight>
-            {isAuthenticated
+            {
+              isAuthenticated
               ? <NavItem onClick={handleLogout}>Logout</NavItem>
               : <>
                   <LinkContainer to="/signup">
@@ -60,6 +61,7 @@ function App(props) {
                   </LinkContainer>
                 </>
             }
+            
           </Nav>
         </Navbar.Collapse>
       </Navbar>

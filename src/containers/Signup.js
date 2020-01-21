@@ -3,7 +3,8 @@ import {
   HelpBlock,
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
+  Button
 } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import { useFormFields } from "../libs/hooksLib";
@@ -67,6 +68,14 @@ export default function Signup(props) {
     }
   }
 
+  async function handleResendCode(){
+      try{
+          await Auth.resendSignUp(fields.email);
+      } catch(e){
+          alert(e.message);
+      }
+  }
+
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmationSubmit}>
@@ -79,6 +88,7 @@ export default function Signup(props) {
             value={fields.confirmationCode}
           />
           <HelpBlock>Please check your email for the code.</HelpBlock>
+          <Button variant="link" onClick={handleResendCode}>Resend Code</Button>
         </FormGroup>
         <LoaderButton
           block
